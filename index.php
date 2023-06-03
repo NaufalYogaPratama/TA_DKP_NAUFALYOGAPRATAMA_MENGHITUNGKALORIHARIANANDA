@@ -16,7 +16,7 @@
                 <div class ="menu">
                     <ul class="nav_links">
                         <li>
-                            <a href="#home">HOME</a>
+                            <a href="#hoem">HOME</a>
                         </li>
                         <li>
                             <a href="#referensi">REFERENSI</a>
@@ -362,7 +362,6 @@
                 <h1>About Me</h1>
 
                 <?php
-                // Array berisi informasi tentang tim atau perusahaan
                 $aboutInfo = array(
                     array(
                         "name" => "NAUFAL YOGA PRATAMA",
