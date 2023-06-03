@@ -22,7 +22,7 @@
                             <a href="#referensi">REFERENSI</a>
                         </li>
                         <li>
-                            <a href="index.php?page=contact">ABOUT</a>
+                            <a href="#about">ABOUT</a>
                         </li>
                         <li>
                             <a class="tombol" href="#kalkulator">KALKULATOR</a>
@@ -50,71 +50,69 @@
                             <tr>
                                 <td>
                                     <label><strong>Berat Badan (Kg) :</strong></label>
-                                    <input type="number" name="num1" value="" required placeholder="Masukkan Berat Badan Anda"/>
+                                        <input type="number" name="num1" value="<?php echo isset($_POST['reset']) ? '' : (isset($_POST['num1']) ? $_POST['num1'] : ''); ?>" required placeholder="Masukkan Berat Badan Anda" />
                                 </td>
                             </tr>               
                         <td>
                         <label>
                             <strong>Tinggi Badan (Cm) :</strong>
                         </label>
-                            <input type="number" name="num2" value="" required placeholder="Masukkan Tinggi Badan Anda"/>
+                            <input type="number" name="num2" value="<?php echo isset($_POST['reset']) ? '' : (isset($_POST['num2']) ? $_POST['num2'] : ''); ?>" required placeholder="Masukkan Tinggi Badan Anda" />
                         </td>
                     <tr>
                         <td>
                         <label><strong>Usia :</strong></label> 
-                            <input type="number" name="num3" value="" required
-                            placeholder="Masukkan Usia Anda"/>
+                            <input type="number" name="num3" value="<?php echo isset($_POST['reset']) ? '' : (isset($_POST['num3']) ? $_POST['num3'] : ''); ?>" required placeholder="Masukkan Usia Anda" />
                         </td>
                     </tr>
 
                     <tr>
                         <div style="margin-bottom: 1rem;">
                         <label class='jk'>Jenis Kelamin :</label> 
-                            <input class="lp" type="radio" name="jk" value="l" required >Laki-Laki 
-                            <input class="lp" type="radio" name="jk" value="p" required > Perempuan
+                            <input class="lp" type="radio" name="jk" value="l" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['jk']) && $_POST['jk'] == 'l' ? 'checked' : ''); ?> required />Laki-Laki
+                            <input class="lp" type="radio" name="jk" value="p" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['jk']) && $_POST['jk'] == 'p' ? 'checked' : ''); ?> required />Perempuan
                         </div>
                     </tr>
 
                     <tr>
                         <td>
                         <label><strong>Level Aktivitas Fisik</strong></label>
-                        <select name="laf" >
-                        <option value="0">Pilih Level Aktivitas Fisik Anda</option>
-                        <option value="1">Tidak Aktif/Sangat Jarang Berolahraga</option>
-                        <option value="2">Aktivitas Ringan/Berolahraga 1-3 Hari/Minggu)</option>
-                        <option value="3">Aktivitas Sedang/Berolahraga 3-5 Hari/Minggu)</option>
-                        <option value="4">Aktivitas Berat/Berolahraga 6-7 Hari/Minggu)</option>
-                        <option value="5">Aktivitas Sangat Berat/ Sangat Sering Berolahraga</option>
+                        <select name="laf" required>
+                            <option value="">Pilih Level Aktivitas Fisik Anda</option>
+                            <option value="1" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['laf']) && $_POST['laf'] == '1' ? 'selected' : ''); ?>>Tidak Aktif/Sangat Jarang Berolahraga</option>
+                            <option value="2" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['laf']) && $_POST['laf'] == '2' ? 'selected' : ''); ?>>Aktivitas Ringan/Berolahraga 1-3 Hari/Minggu</option>
+                            <option value="3" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['laf']) && $_POST['laf'] == '3' ? 'selected' : ''); ?>>Aktivitas Sedang/Berolahraga 3-5 Hari/Minggu</option>
+                            <option value="4" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['laf']) && $_POST['laf'] == '4' ? 'selected' : ''); ?>>Aktivitas Berat/Berolahraga 6-7 Hari/Minggu</option>
+                            <option value="5" <?php echo isset($_POST['reset']) ? '' : (isset($_POST['laf']) && $_POST['laf'] == '5' ? 'selected' : ''); ?>>Aktivitas Sangat Berat/Sangat Sering Berolahraga</option>
                         </select>
                         </td>
                     </tr>
 
                     <tr>
                         <td> 
-                            <button type="submit" name="submit" value="">Hitung !</button>
+                            <button type="submit" name="submit" value="hitung">Hitung !</button>
+                            <button type="submit" name="reset" value="reset">Reset</button>
                         </td>
                     </tr>
                     <td>
                         <img src="image/healthy-food-calories-calculator.png" alt="" style="float:center;width:10vh;height:12vh;border-radius:10px;">
                     </td>
                 </table>
-                    <?php
-                        if(isset($_POST['submit'])) {
-
+                <?php
+                    if (isset($_POST['submit'])) {
                         $b = $_POST['num1'];
                         $t = $_POST['num2'];
                         $u = $_POST['num3'];
                         $k = $_POST['jk'];
                         $af = $_POST['laf'];
-
-                            if ($k == "l") {
-
+                
+                        if ($k == "l") {
                             switch ($af) {
                                 case "1":
                                     $mbr = 66.5 + (13.75 * $b) + (5.003 * $t) - (6.75 * $u);
                                     $cal = $mbr * 1.2;
                                     echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
@@ -125,7 +123,7 @@
                                     $mbr = 66.5 + (13.75 * $b) + (5.003 * $t) - (6.75 * $u);
                                     $cal = $mbr * 1.375;
                                     echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
@@ -136,7 +134,7 @@
                                     $mbr = 66.5 + (13.75 * $b) + (5.003 * $t) - (6.75 * $u);
                                     $cal = $mbr * 1.55;
                                     echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
@@ -147,86 +145,84 @@
                                     $mbr = 66.5 + (13.75 * $b) + (5.003 * $t) - (6.75 * $u);
                                     $cal = $mbr * 1.725;
                                     echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
                                     break;
+
                                 case "5":
                                     $mbr = 66.5 + (13.75 * $b) + (5.003 * $t) - (6.75 * $u);
                                     $cal = $mbr * 1.9;
                                     echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
                                     echo "</br>";
                                     break;
-                                }
-                            }	elseif ($k == "p") {
-
-                            switch ($af) {
-                                case "1":
-                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
-                                    $cal = $mbr * 1.2;
-                                    echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    break;
-
-                                case "2":
-                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
-                                    $cal = $mbr * 1.375;
-                                    echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    break;
-
-                                case "3":
-                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
-                                    $cal = $mbr * 1.55;
-                                    echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    break;
-
-                                case "4":
-                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
-                                    $cal = $mbr * 1.725;
-                                    echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    break;
-
-                                case "5":
-                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
-                                    $cal = $mbr * 1.9;
-                                    echo "</br>";
-                                    echo " Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari" ;
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    echo "</br>";
-                                    break;
-                                }
-                                    
-                                }
-                                    
                             }
-                        ?>                       
+                        } elseif ($k == "p") {
+                            switch ($af) {
+                                case "1":
+                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
+                                    $cal = $mbr * 1.2;
+                                    echo "</br>";
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    break;
+
+                                case "2":
+                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
+                                    $cal = $mbr * 1.375;
+                                    echo "</br>";
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    break;
+
+                                case "3":
+                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
+                                    $cal = $mbr * 1.55;
+                                    echo "</br>";
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    break;
+
+                                case "4":
+                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
+                                    $cal = $mbr * 1.725;
+                                    echo "</br>";
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    break;
+
+                                case "5":
+                                    $mbr = 655.1 + (9.563 * $b) + (1.850 * $t) - (4.676 * $u);
+                                    $cal = $mbr * 1.9;
+                                    echo "</br>";
+                                    echo "Kebutuhan Kalori Anda: " . "</br>" . "</br>" . $cal . " Kalori/Hari";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    echo "</br>";
+                                    break;
+                            }
+                        }
+                    }
+                    ?>                       
                     </form>
             </section>
             <!-- untuk referensi -->
